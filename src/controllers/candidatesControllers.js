@@ -2,14 +2,23 @@ const Candidates = require("../models/candidatesModel");
 
 exports.createCandidates = async (req, res) => {
   try {
-    const { firstname, lastname, course, email, position, advocacy } = req.body;
-    const candidates = await Candidates.fileCOC(
-      firstname, 
+    const {
+      firstname,
       lastname,
       course,
       email,
       position,
-      advocacy
+      advocacy,
+      organization,
+    } = req.body;
+    const candidates = await Candidates.fileCOC(
+      firstname,
+      lastname,
+      course,
+      email,
+      position,
+      advocacy,
+      organization
     );
     res.status(201).json(candidates);
   } catch (error) {
@@ -20,12 +29,26 @@ exports.createCandidates = async (req, res) => {
 
 exports.updateFiledCoC = async (req, res) => {
   try {
-    const { id, firstname, lastname, email, status, approver_remarks, approved_by } = req.body;
+    const {
+      id,
+      firstname,
+      lastname,
+      email,
+      course,
+      position,
+      organization,
+      status,
+      approver_remarks,
+      approved_by,
+    } = req.body;
     const update_coc = await Candidates.updateCoC(
       id,
       firstname,
       lastname,
       email,
+      course,
+      position,
+      organization,
       status,
       approver_remarks,
       approved_by
